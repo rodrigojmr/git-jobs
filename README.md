@@ -1,30 +1,16 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## GitHub Jobs
 
-First, run the development server:
+This project is based on the [https://www.frontendmentor.io/challenges/github-jobs-api-93L-NL6rP](design from Frontend Mentor).
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Created using:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Next.js
+- Styled components
+- React Query
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+![Desktop](https://res.cloudinary.com/dz209s6jk/image/upload/v1601561922/Challenges/k0urkabzixqi3oiutypl.jpg)
+![Desktop Job Details](https://res.cloudinary.com/dz209s6jk/image/upload/v1601561923/Challenges/ggiypb08pgvzhfvaruq1.jpg)
+![Tablet](https://res.cloudinary.com/dz209s6jk/image/upload/v1601562026/Challenges/kq2l4hiwukvi0racuasd.jpg)
+![Mobile](https://res.cloudinary.com/dz209s6jk/image/upload/v1601562026/Challenges/c7uhxzz22bfdaejiz99b.jpg)
