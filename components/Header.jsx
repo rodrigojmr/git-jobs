@@ -3,20 +3,20 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import ThemeToggle from './ThemeToggle';
 
+const Head = styled.header`
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  padding-bottom: 4rem;
+  background-color: var(--color-primary);
+`;
+
+const FlexCenter = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 const Header = () => {
-  const Head = styled.header`
-    display: flex;
-    justify-content: space-between;
-    padding: 2rem;
-    padding-bottom: 4rem;
-    background-color: var(--color-primary);
-  `;
-
-  const FlexCenter = styled.div`
-    display: flex;
-    align-items: center;
-  `;
-
   return (
     <Head>
       <Link href="/">

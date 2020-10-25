@@ -36,7 +36,7 @@ const FormInput = React.forwardRef(
   (
     {
       className = '',
-      label,
+      name,
       placeholder = '',
       type = text,
       checkboxValue = false,
@@ -46,14 +46,15 @@ const FormInput = React.forwardRef(
   ) => {
     return (
       <>
-        <Label style={{}} htmlFor={`${label}-input`}>
-          {label}
+        <Label style={{}} htmlFor={`${name}-input`}>
+          {name}
         </Label>
         <Input
-          id={`${label}-input`}
+          id={`${name}-input`}
           ref={ref}
           className={className}
           type={type}
+          name={name}
           checkboxValue={checkboxValue}
           placeholder={placeholder}
         />

@@ -10,6 +10,7 @@ const GlobalStyles = createGlobalStyle`
   }
   body {
     background: var(--bg-primary);
+    color: var(--color-contrast)
   }
   a {
     color: var(--color-primary);
