@@ -3,7 +3,12 @@ import styles from '../styles/Home.module.css';
 import Search from '../components/Search/Search';
 import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
-import { useInfiniteQuery, queryCache, useQueryCache } from 'react-query';
+import {
+  useInfiniteQuery,
+  queryCache,
+  useQueryCache,
+  useMutation
+} from 'react-query';
 
 import React, { useState, useEffect } from 'react';
 
@@ -48,36 +53,50 @@ const Home = () => {
     fullTime: false
   });
 
-  const fetchJobs = async (key, page = 1) => {
-    const { text, location, fullTime } = searchParams;
-    try {
+  const [mutate, { isLoading, error, data }] = useMutation(
+    async (params = searchParams) => {
+      const { text, location, fullTime } = params;
       const res = await fetch(
         `https://api.allorigins.win/get?url=${encodeURIComponent(
-          `https://jobs.github.com/positions.json?description=${text}&page=${page}&location=${location}&full_time=${fullTime}`
+          `https://jobs.github.com/positions.json?page=${page}&description=${text}&location=${location}&full_time=${fullTime}`
         )}`
       );
-      const json = await res.json();
-      const results = JSON.parse(await json.contents);
-      return {
-        results,
-        nextPage: page + 1
-      };
-    } catch (error) {
-      console.log(error);
+      const data = await res.json();
+      return JSON.parse(data.contents);
     }
-  };
+  );
 
-  const {
-    status,
-    data,
-    error,
-    isFetching,
-    isFetchingMore,
-    fetchMore,
-    canFetchMore
-  } = useInfiniteQuery('jobs', fetchJobs, {
-    getFetchMore: (lastGroup, allGroups) => lastGroup.nextPage
-  });
+  // * useInfiniteQuery attempt
+  // const fetchJobs = async (key, page = 1, searchParams) => {
+  //   const { text, location, fullTime } = searchParams;
+  //   console.log('searchParams: ', searchParams);
+  //   try {
+  //     const res = await fetch(
+  //       `https://api.allorigins.win/get?url=${encodeURIComponent(
+  //         `https://jobs.github.com/positions.json?description=${text}&page=${page}&location=${location}&full_time=${fullTime}`
+  //       )}`
+  //     );
+  //     const json = await res.json();
+  //     const results = JSON.parse(await json.contents);
+  //     return {
+  //       results,
+  //       nextPage: page + 1
+  //     };
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // const {
+  //   status,
+  //   data,
+  //   error,
+  //   isFetching,
+  //   isFetchingMore,
+  //   fetchMore,
+  //   canFetchMore
+  // } = useInfiniteQuery('jobs', () => fetchJobs('jobs', page, searchParams), {
+  //   getFetchMore: (lastGroup, allGroups) => lastGroup.nextPage
+  // });
 
   const onSubmit = async data => {
     const { text, location, fullTime } = data;
@@ -97,14 +116,13 @@ const Home = () => {
   return (
     <>
       <Search onSubmit={handleSubmit(onSubmit)} ref={register} />
-
-      <Results>
-        {data[0].results.map(el => (
-          <Result />
-        ))}
-      </Results>
-      {isFetching && <p>Loading...</p>}
-      {data && <p>Got data</p>}
+      {data && (
+        <Results>
+          {data[0].results.map(result => (
+            <Result key={result.id} />
+          ))}
+        </Results>
+      )}
     </>
   );
 };
