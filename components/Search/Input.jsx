@@ -18,7 +18,6 @@ const Input = styled.input`
   outline: none;
   font-size: 1.1rem;
   border-bottom: 2px solid var(--bg-secondary);
-  transition: all 0.2s ease-in;
   &::-webkit-input-placeholder {
     color: var(--color-grey);
   }

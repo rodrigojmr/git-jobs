@@ -1,29 +1,27 @@
 import React, { Component } from 'react';
-import {
-  QueryCache,
-  ReactQueryCacheProvider,
-  ReactQueryConfigProvider
-} from 'react-query';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import App from '../components/App';
-const queryCache = new QueryCache();
 
-const overrides = {
-  queries: {
-    refetchOnMount: true,
-    refetchOnReconnect: true,
-    refetchOnWindowFocus: false
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnMount: true,
+      refetchOnReconnect: true,
+      refetchOnWindowFocus: false
+    },
+    mutations: {
+      // mutation options
+    }
   }
-};
+});
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ReactQueryCacheProvider queryCache={queryCache}>
-      <ReactQueryConfigProvider config={overrides}>
-        <App>
-          <Component {...pageProps} />
-        </App>
-      </ReactQueryConfigProvider>
-    </ReactQueryCacheProvider>
+    <QueryClientProvider client={queryClient}>
+      <App>
+        <Component {...pageProps} />
+      </App>
+    </QueryClientProvider>
   );
 }
 
