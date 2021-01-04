@@ -1,14 +1,18 @@
 import React from 'react';
-import { ThemeProvider } from './Theme/ThemeContext';
+import { DarkLightThemeProvider } from './Theme/ThemeContext';
+import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './Theme/GlobalStyles';
 import Header from './Header';
+import theme from './Theme/theme';
 
 function App({ children }) {
   return (
-    <ThemeProvider>
-      <GlobalStyles />
-      <Header />
-      {children}
+    <ThemeProvider theme={theme}>
+      <DarkLightThemeProvider>
+        <GlobalStyles />
+        <Header />
+        {children}
+      </DarkLightThemeProvider>
     </ThemeProvider>
   );
 }

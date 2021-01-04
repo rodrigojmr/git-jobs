@@ -4,7 +4,7 @@ import { COLORS, COLOR_MODE_KEY, INITIAL_COLOR_MODE_CSS_PROP } from './colors';
 
 export const ThemeContext = React.createContext();
 
-export const ThemeProvider = ({ children }) => {
+export const DarkLightThemeProvider = ({ children }) => {
   const [colorMode, rawSetColorMode] = React.useState(undefined);
 
   React.useEffect(() => {
