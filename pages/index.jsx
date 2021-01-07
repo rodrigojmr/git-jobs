@@ -38,13 +38,18 @@ const Home = () => {
 
   const fetchJobs = async ({ queryKey, pageParams = 0 }) => {
     const [_key, text, location, fullTime] = queryKey;
-    const res = await fetch(
-      `https://api.allorigins.win/get?url=${encodeURIComponent(
-        `https://jobs.github.com/positions.json?description=${text}&page=${pageParams}&location=${location}&full_time=${fullTime}`
-      )}`
-    );
-    const data = await res.json();
-    return JSON.parse(data.contents);
+    try {
+      const res = await fetch(
+        `https://api.allorigins.win/get?url=${encodeURIComponent(
+          `https://jobs.github.com/positions.json?description=${text}&page=${pageParams}&location=${location}&full_time=${fullTime}`
+        )}`,
+        { credentials: 'include' }
+      );
+      const data = await res.json();
+      return JSON.parse(data.contents);
+    } catch (error) {
+      throw new Error('Could not fetch Jobs');
+    }
   };
 
   const {

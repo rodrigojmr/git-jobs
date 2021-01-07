@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 import styled, { css } from 'styled-components';
 import { randomBGIndex, timeDifference } from '../../utils';
-
+import { Dot } from '../styled';
 const Container = styled.article`
   position: relative;
   display: flex;
@@ -46,13 +46,6 @@ const Title = styled.h3`
   text-decoration: none;
 `;
 
-const Dot = styled.span`
-  margin: 0 10px;
-  font-size: 2rem;
-  line-height: 0;
-  margin-bottom: 5px;
-`;
-
 const StyledLink = styled.a`
   text-decoration: none;
 `;
@@ -75,7 +68,7 @@ const Result = ({ job }) => {
         <p>{job.type}</p>
       </div>
       <Title>
-        <Link prefetch href={`/jobs/${job.id}`} passHref>
+        <Link href={`/jobs/${job.id}`} passHref>
           <StyledLink>{job.title}</StyledLink>
         </Link>
       </Title>
