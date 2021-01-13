@@ -2,7 +2,7 @@ import React from 'react';
 import FormInput from './Input';
 import CheckBox from './CheckBox';
 import { Wrapper, FormStyle, Child, Icon, CheckBoxStyle } from './Styles';
-import Button from '../Button';
+import Button from '@components/Button';
 
 const Search = React.forwardRef(({ onSubmit }, ref) => {
   return (

@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { ThemeContext } from './Theme/ThemeContext';
 import styled from 'styled-components';
 

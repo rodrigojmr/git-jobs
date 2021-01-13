@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import App from '../components/App';
+import App from '@components/App';
 
 const queryClient = new QueryClient({
   defaultOptions: {

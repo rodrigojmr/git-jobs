@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { randomBGIndex, timeDifference } from '../../utils';
-import { Dot } from '../styled';
+import { randomBGIndex, timeDifference } from 'utils';
+import { Dot } from '@components/styled';
+
 const Container = styled.article`
   position: relative;
   display: flex;

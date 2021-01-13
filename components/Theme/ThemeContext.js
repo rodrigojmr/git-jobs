@@ -22,7 +22,6 @@ export const DarkLightThemeProvider = ({ children }) => {
 
   const contextValue = React.useMemo(() => {
     function setColorMode(newValue) {
-      console.log('newValue: ', newValue);
       const root = window.document.documentElement;
 
       localStorage.setItem(COLOR_MODE_KEY, newValue);

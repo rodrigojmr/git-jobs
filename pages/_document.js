@@ -3,7 +3,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document';
 import {
   FallbackStyles,
   MagicScriptTag
-} from '../components/Theme/InlineCSSVariables';
+} from '@components/Theme/InlineCSSVariables';
 import { ServerStyleSheet } from 'styled-components';
 
 class MyDocument extends Document {

@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
 import ThemeToggle from './ThemeToggle';
@@ -67,7 +66,7 @@ const Header = () => {
               ('inline-block w-3.5 h-3.5 transition duration-200 ease-in-out transform bg-violet rounded-full shadow',
               darkMode ? 'translate-x-5' : 'translate-x-0')
             }
-          ></span> 
+          ></span>
         </span>
         <svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
           <path

@@ -31,6 +31,9 @@ export const randomBGIndex = () => {
   // }
 };
 
+export const randomNum = (min, max) =>
+  Math.floor(Math.random() * (max - min + 1)) + min;
+
 export const timeDifference = date => {
   const current = new Date().getTime();
   const previous = Date.parse(date);

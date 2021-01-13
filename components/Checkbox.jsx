@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Box = styled.input`
   appearance: none;
   display: inline-block;
