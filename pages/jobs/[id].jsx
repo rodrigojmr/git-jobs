@@ -3,14 +3,9 @@ import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { useQuery } from 'react-query';
 import Image from 'next/image';
-import {
-  Button,
-  Flex,
-  Heading,
-  Dot,
-  HighlightText
-} from '../../components/styled';
-import { timeDifference } from '../../utils';
+import { Button, Flex, Heading, Dot, HighlightText } from '@components/styled';
+import { timeDifference } from 'utils';
+import SkeletonJobView from '@components/Skeleton/SkeletonJobView';
 
 const Main = styled.main`
   position: relative;
@@ -32,7 +27,7 @@ const CompanyInfo = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
-  background-color: white;
+  background-color: var(--bg-secondary);
   height: 100%;
 `;
 
@@ -54,7 +49,22 @@ const Info = styled.div`
 
 const DescriptionWrapper = styled.div`
   padding: 3rem 2rem;
-  background-color: white;
+  background-color: var(--bg-secondary);
+
+  strong {
+    color: #222;
+  }
+  ul {
+    list-style-position: inside;
+  }
+  li {
+    padding-inline-start: 15px;
+    color: #9297a2;
+  }
+  li::before {
+    content: '';
+    margin-left: 0.5rem;
+  }
 `;
 
 const Description = styled.article`
@@ -63,6 +73,20 @@ const Description = styled.article`
   p {
     margin-top: 1.25em;
     margin-bottom: 1.25em;
+  }
+`;
+
+const ApplySection = styled(DescriptionWrapper)`
+  color: var(--bg-secondary);
+  background-color: var(--color-primary);
+  p,
+  span,
+  a {
+    color: white;
+    line-height: 1.5;
+  }
+  a:hover {
+    color: ;
   }
 `;
 
@@ -93,6 +117,8 @@ const JobDetails = () => {
   const applyUrl = job?.how_to_apply.match(/href="(.*)"/)[1];
   console.log('applyUrl: ', applyUrl);
 
+  if (isLoading) return <SkeletonJobView />;
+
   return (
     <Main>
       <Container>
@@ -105,6 +131,7 @@ const JobDetails = () => {
                   <div>
                     <Heading
                       css={`
+                        color: var(--extra-constrast);
                         margin-bottom: 0.8rem;
                         line-height: 1;
                       `}
@@ -140,6 +167,7 @@ const JobDetails = () => {
                   </p>
                   <Heading
                     css={`
+                      color: var(--extra-constrast);
                       margin-top: 1rem;
                       margin-bottom: 1rem;
                     `}
@@ -152,6 +180,7 @@ const JobDetails = () => {
                   primary
                   css={`
                     margin-left: auto;
+                    white-space: nowrap;
                   `}
                   as="a"
                   href={applyUrl}
@@ -165,6 +194,22 @@ const JobDetails = () => {
                 }}
               ></Description>
             </DescriptionWrapper>
+            <ApplySection>
+              <Heading
+                css={`
+                  color: white;
+                  margin-bottom: 1rem;
+                `}
+                as="h4"
+              >
+                How to Apply
+              </Heading>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: job.how_to_apply || ''
+                }}
+              ></div>
+            </ApplySection>
           </>
         )}
       </Container>

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import Search from '../components/Search/Search';
+import Search from '@components/Search/Search';
 import styled from 'styled-components';
 import { useForm, Controller } from 'react-hook-form';
 import { useQueryClient, useInfiniteQuery } from 'react-query';
-import Result from '../components/Results/Result';
+import Result from '@components/Results/Result';
+import SkeletonResult from '@components/Skeleton/SkeletonResult';
 
 const Results = styled.div`
   display: grid;
@@ -75,22 +74,36 @@ const Home = () => {
       location,
       fullTime
     });
-    // Want to make a new query call to fetch new Jobs with different parameters
-
-    // Using refetchOnWindowFocus uses the parameters from the new searchParams state,
-    // but using useQueryCache.refetchQueries() here does not, as fetchJobs uses initial searchParams object
   };
 
   return (
     <>
       <Search onSubmit={handleSubmit(onSubmit)} ref={register} />
-      {data && (
-        <Results>
-          {data.pages[0].map(job => (
-            <Result key={job.id} job={job} />
-          ))}
-        </Results>
-      )}
+      <Results>
+        {isFetching && (
+          <>
+            <SkeletonResult />
+            <SkeletonResult />
+            <SkeletonResult />
+            <SkeletonResult />
+            <SkeletonResult />
+            <SkeletonResult />
+            <SkeletonResult />
+            <SkeletonResult />
+            <SkeletonResult />
+            <SkeletonResult />
+            <SkeletonResult />
+            <SkeletonResult />
+          </>
+        )}
+        {data && (
+          <>
+            {data.pages[0].map(job => (
+              <Result key={job.id} job={job} />
+            ))}
+          </>
+        )}
+      </Results>
     </>
   );
 };
