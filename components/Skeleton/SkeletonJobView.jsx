@@ -15,6 +15,7 @@ const Container = styled.div`
   transform: translateX(-50%);
   width: 40rem;
   > * {
+    margin-bottom: 1.5rem;
     border-radius: 5px;
     overflow: hidden;
   }
@@ -23,7 +24,6 @@ const Container = styled.div`
 const CompanyInfo = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
   background-color: var(--bg-secondary);
   height: 100%;
 `;

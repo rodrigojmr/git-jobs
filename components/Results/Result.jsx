@@ -26,6 +26,9 @@ const Badge = styled.div`
   font-weight: 800;
   background-color: ${({ theme, bgIndex }) => theme.bgColors[bgIndex]};
   line-height: 1;
+  p {
+    color: white;
+  }
 `;
 
 const Company = styled.p`

@@ -61,5 +61,3 @@ export const CheckBoxStyle = styled.input`
     font-weight: bold;
   }
 `;
-
-export const Button = styled.button``;

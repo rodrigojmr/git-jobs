@@ -5,6 +5,12 @@ import { useForm, Controller } from 'react-hook-form';
 import { useQueryClient, useInfiniteQuery } from 'react-query';
 import Result from '@components/Results/Result';
 import SkeletonResult from '@components/Skeleton/SkeletonResult';
+import { Button } from '@components/styled';
+
+const LoadButton = styled(Button)`
+  grid-column: 1 / -1;
+  justify-self: center;
+`;
 
 const Results = styled.div`
   display: grid;
@@ -26,7 +32,6 @@ const Results = styled.div`
 const Home = () => {
   const { register, handleSubmit, control, reset } = useForm();
 
-  const [page, setPage] = useState(1);
   const [searchParams, setSearchParams] = useState({
     text: '',
     location: '',
@@ -35,17 +40,24 @@ const Home = () => {
 
   const queryClient = useQueryClient();
 
-  const fetchJobs = async ({ queryKey, pageParams = 0 }) => {
+  const fetchJobs = async ({ queryKey, pageParam = 1 }) => {
     const [_key, text, location, fullTime] = queryKey;
+    console.log(
+      `https://jobs.github.com/positions.json?description=${text}&location=${location}&full_time=${fullTime}&page=${pageParam}`
+    );
     try {
       const res = await fetch(
         `https://api.allorigins.win/get?url=${encodeURIComponent(
-          `https://jobs.github.com/positions.json?description=${text}&page=${pageParams}&location=${location}&full_time=${fullTime}`
+          `https://jobs.github.com/positions.json?description=${text}&location=${location}&full_time=${fullTime}&page=${pageParam}`
         )}`,
         { credentials: 'include' }
       );
       const data = await res.json();
-      return JSON.parse(data.contents);
+      const results = {
+        jobs: JSON.parse(data.contents),
+        page: pageParam + 1
+      };
+      return results;
     } catch (error) {
       throw new Error('Could not fetch Jobs');
     }
@@ -54,16 +66,20 @@ const Home = () => {
   const {
     status,
     data,
-    error,
     isFetching,
-    isFetchingMore,
-    fetchMore,
-    canFetchMore
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage
   } = useInfiniteQuery(
     ['jobs', searchParams.text, searchParams.location, searchParams.fullTime],
     fetchJobs,
     {
-      getFetchMore: (lastGroup, allGroups) => lastGroup.nextPage
+      getNextPageParam: ({ jobs, page }) => {
+        if (jobs.length === 50) {
+          return page;
+        }
+        return false;
+      }
     }
   );
 
@@ -76,6 +92,7 @@ const Home = () => {
     });
   };
 
+  console.table(data);
   return (
     <>
       <Search onSubmit={handleSubmit(onSubmit)} ref={register} />
@@ -96,11 +113,18 @@ const Home = () => {
             <SkeletonResult />
           </>
         )}
-        {data && (
+        {data?.pages && (
           <>
-            {data.pages[0].map(job => (
-              <Result key={job.id} job={job} />
-            ))}
+            {data.pages.map(page =>
+              page.jobs.map(job => <Result key={job.id} job={job} />)
+            )}
+            <LoadButton
+              onClick={() => fetchNextPage()}
+              disabled={!hasNextPage || isFetchingNextPage}
+              primary
+            >
+              Load More
+            </LoadButton>
           </>
         )}
       </Results>

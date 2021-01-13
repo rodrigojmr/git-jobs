@@ -1,8 +1,8 @@
 import React from 'react';
 import FormInput from './Input';
 import CheckBox from './CheckBox';
+import { Button } from '@components/styled';
 import { Wrapper, FormStyle, Child, Icon, CheckBoxStyle } from './Styles';
-import Button from '@components/Button';
 
 const Search = React.forwardRef(({ onSubmit }, ref) => {
   return (
@@ -40,7 +40,9 @@ const Search = React.forwardRef(({ onSubmit }, ref) => {
             Full Time Only
           </label>
         </Child>
-        <Button primary={true}>Search</Button>
+        <Button type="submit" primary>
+          Search
+        </Button>
       </FormStyle>
     </Wrapper>
   );

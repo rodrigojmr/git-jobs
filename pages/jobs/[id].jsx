@@ -18,6 +18,8 @@ const Container = styled.div`
   transform: translateX(-50%);
   width: 40rem;
   > * {
+    margin-bottom: 1.5rem;
+
     border-radius: 5px;
     overflow: hidden;
   }
@@ -26,7 +28,6 @@ const Container = styled.div`
 const CompanyInfo = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 1.5rem;
   background-color: var(--bg-secondary);
   height: 100%;
 `;
@@ -52,7 +53,7 @@ const DescriptionWrapper = styled.div`
   background-color: var(--bg-secondary);
 
   strong {
-    color: #222;
+    color: var(--color-contrast);
   }
   ul {
     list-style-position: inside;
@@ -85,9 +86,9 @@ const ApplySection = styled(DescriptionWrapper)`
     color: white;
     line-height: 1.5;
   }
-  a:hover {
+  /* a:hover {
     color: ;
-  }
+  } */
 `;
 
 const JobDetails = () => {
@@ -159,7 +160,11 @@ const JobDetails = () => {
                   align-items: center;
                 `}
               >
-                <div>
+                <div
+                  css={`
+                    margin-right: auto;
+                  `}
+                >
                   <p>
                     <span>{timeDifference(job.created_at)}</span>
                     <Dot>·</Dot>
@@ -176,15 +181,7 @@ const JobDetails = () => {
                   </Heading>
                   <HighlightText>{job.location}</HighlightText>
                 </div>
-                <Button
-                  primary
-                  css={`
-                    margin-left: auto;
-                    white-space: nowrap;
-                  `}
-                  as="a"
-                  href={applyUrl}
-                >
+                <Button primary as="a" href={applyUrl}>
                   Apply Now
                 </Button>
               </Flex>

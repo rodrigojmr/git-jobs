@@ -6,14 +6,28 @@ export const Heading = styled.h1`
 `;
 
 export const Button = styled.button`
-  display: inline-block;
-  padding: 1rem 1.25rem;
-  font-weight: 600;
-  border-radius: 5px;
-  color: ${props => (props.primary ? 'white' : 'var(--color-primary)')};
   text-decoration: none;
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
   background-color: ${props =>
-    props.primary ? 'var(--color-primary)' : '#EEEFFA'};
+    props.primary ? 'var(--color-primary)' : 'var(--bg-primary)'};
+  color: ${props => (props.primary ? 'white' : 'var(--color-contrast)')};
+  border: ${props =>
+    `1px solid ${
+      props.primary ? 'var(--color-primary) ' : 'var(--bg-primary)'
+    }`};
+  border-radius: 5px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  ${({ disabled }) =>
+    disabled
+      ? `
+  cursor: not-allowed;
+  filter: brightness(.6);
+  `
+      : null}
 `;
 
 export const Flex = styled.div`
