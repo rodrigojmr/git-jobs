@@ -12,7 +12,7 @@ const CheckBox = styled.span`
   background-color: #fff;
   border-color: transparent;
   border-width: 2px;
-  border-radius: 15px;
+  border-radius: 1rem;
   padding: 0.25rem;
   margin: 0 1rem;
   &:focus {
@@ -27,14 +27,14 @@ const Icon = styled.img`
 `;
 
 const ThemeIndicator = styled.span`
-  height: 20px;
-  width: 20px;
+  height: 1.6rem;
+  width: 1.6rem;
   border-radius: 50%;
   display: inline-block;
   background-color: var(--color-primary);
   transition: all 0.15s ease-out;
   transform: ${({ colorMode }) =>
-    colorMode === 'dark' ? `translateX(2.2rem)` : `translateX(0px)`};
+    colorMode === 'dark' ? `translateX(1.8rem)` : `translateX(0px)`};
 `;
 
 const ThemeToggle = () => {
