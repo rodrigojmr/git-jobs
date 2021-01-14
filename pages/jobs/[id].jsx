@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Button, Flex, Heading, Dot, HighlightText } from '@components/styled';
 import { timeDifference } from 'utils';
 import SkeletonJobView from '@components/Skeleton/SkeletonJobView';
+import { randomBGIndex } from 'utils';
 
 const Main = styled.main`
   position: relative;
@@ -34,8 +35,13 @@ const CompanyInfo = styled.div`
 
 const Logo = styled.div`
   align-self: stretch;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 3rem;
   width: 10rem;
-  background-color: grey;
+  background-color: ${({ theme, bgIndex }) => theme.bgColors[bgIndex]};
 `;
 
 const Info = styled.div`
@@ -127,9 +133,15 @@ const JobDetails = () => {
           <>
             <CompanyInfo>
               <>
-                <Logo />
+                <Logo bgIndex={randomBGIndex(job.company.charAt(0))}>
+                  {job.company.charAt(0).toUpperCase()}
+                </Logo>
                 <Info>
-                  <div>
+                  <div
+                    css={`
+                      margin-right: auto;
+                    `}
+                  >
                     <Heading
                       css={`
                         color: var(--extra-constrast);
@@ -144,7 +156,8 @@ const JobDetails = () => {
                   </div>
                   <Button
                     css={`
-                      margin-left: auto;
+                      flex-shrink: 0;
+                      margin-left: 1rem;
                     `}
                     as="a"
                     href={job.company_url}

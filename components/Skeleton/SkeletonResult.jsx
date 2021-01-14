@@ -37,14 +37,14 @@ const Badge = styled.div`
   border-radius: 15px;
   transform: translateY(-50%);
   font-weight: 800;
-  background-color: ${({ theme, bgIndex }) => theme.bgColors[bgIndex]};
+  background-color: var(--bg-secondary);
   line-height: 1;
 `;
 
 const SkeletonResult = () => {
   return (
     <Container>
-      <Badge bgIndex={randomBGIndex()}></Badge>
+      <Badge></Badge>
       <div
         css={`
           display: flex;

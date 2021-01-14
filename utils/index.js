@@ -1,34 +1,8 @@
-export const randomBGIndex = () => {
-  return Math.floor(Math.random() * 11 + 1);
-
-  // const randomNum = Math.floor(Math.random() * (12 - 1 + 1)) + 1;
-
-  // switch (randomNum) {
-  //   case 1:
-  //     return '#e06eac';
-  //   case 2:
-  //     return '#4db3ce';
-  //   case 3:
-  //     return '#3f3a95';
-  //   case 4:
-  //     return '#efb629';
-  //   case 5:
-  //     return '#e46c3f';
-  //   case 6:
-  //     return '#222021';
-  //   case 7:
-  //     return '#5a64e2';
-  //   case 8:
-  //     return '#fd7e65';
-  //   case 9:
-  //     return '#027bfc';
-  //   case 10:
-  //     return '#4a2928';
-  //   case 11:
-  //     return '#61dcad';
-  //   case 12:
-  //     return '#ff5860';
-  // }
+export const randomBGIndex = char => {
+  const charCode = char.toLowerCase().charCodeAt(0);
+  // Equals 25
+  // We have 13 colors, getting an index from 0 to 12 based on the charcode from a to z
+  return Math.floor((charCode - 'a'.charCodeAt(0)) / 2);
 };
 
 export const randomNum = (min, max) =>

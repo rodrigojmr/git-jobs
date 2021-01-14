@@ -123,7 +123,7 @@ const Home = () => {
               disabled={!hasNextPage || isFetchingNextPage}
               primary
             >
-              Load More
+              {hasNextPage ? 'Load More' : 'Loaded All Jobs!'}
             </LoadButton>
           </>
         )}

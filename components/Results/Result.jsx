@@ -57,7 +57,7 @@ const StyledLink = styled.a`
 const Result = ({ job }) => {
   return (
     <Container>
-      <Badge bgIndex={randomBGIndex()}>
+      <Badge bgIndex={randomBGIndex(job.company.charAt(0))}>
         <p>{job.company[0].toUpperCase()}</p>
       </Badge>
       <div
