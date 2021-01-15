@@ -8,9 +8,9 @@ const GlobalStyles = createGlobalStyle`
     font-family: Kumbh Sans, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 50em) { // 800px
     html {
-      font-size: 80%;
+      font-size: 82%;
     }
   }
   body {

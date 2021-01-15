@@ -13,7 +13,8 @@ const theme = {
     '#61dcad',
     '#ff5860',
     '#8e6cc5'
-  ]
+  ],
+  breakpoints: [37.5, 48, 67.5, 87.5]
 };
 
 export default theme;

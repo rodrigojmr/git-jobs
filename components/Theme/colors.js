@@ -15,6 +15,10 @@ export const COLORS = {
     light: '#475261',
     dark: '#889bb5'
   },
+  'color-grey-light': {
+    light: '#989ca1',
+    dark: '#5d656d'
+  },
   'color-contrast': {
     light: '#484e57',
     dark: '#b4c5db'
