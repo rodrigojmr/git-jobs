@@ -85,7 +85,10 @@ const Description = styled.article`
 
 const ApplySection = styled(DescriptionWrapper)`
   color: var(--bg-secondary);
-  background-color: var(--color-primary);
+  background-image: url('/assets/desktop/bg-pattern-detail-footer.svg');
+  background-size: cover;
+  word-wrap: break-word;
+
   p,
   span,
   a {

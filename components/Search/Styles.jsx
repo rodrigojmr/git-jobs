@@ -1,3 +1,4 @@
+import theme from '@components/Theme/theme';
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
@@ -16,11 +17,17 @@ export const FormStyle = styled.form`
 `;
 
 export const Child = styled.div`
-  padding: 1rem 0.7rem;
+  padding: 1rem;
   display: flex;
-  flex: 1 1;
+  flex: ${({ flex }) => flex};
   display: flex;
   align-items: center;
+  @media screen and (min-width: 670px) {
+    &:nth-child(1),
+    &:nth-child(2) {
+      border-right: 1px solid var(--color-grey-light);
+    }
+  }
 `;
 
 export const Icon = styled.img`

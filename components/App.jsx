@@ -3,14 +3,17 @@ import { ThemeProvider } from 'styled-components';
 import GlobalStyles from './Theme/GlobalStyles';
 import Header from './Header';
 import theme from './Theme/theme';
+import { ModalProvider } from 'styled-react-modal';
 
 function App({ children }) {
   return (
     <ThemeProvider theme={theme}>
       <DarkLightThemeProvider>
-        <GlobalStyles />
-        <Header />
-        {children}
+        <ModalProvider>
+          <GlobalStyles />
+          <Header />
+          {children}
+        </ModalProvider>
       </DarkLightThemeProvider>
     </ThemeProvider>
   );

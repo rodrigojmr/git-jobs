@@ -75,7 +75,7 @@ const Description = styled.article`
 
 const ApplySection = styled(DescriptionWrapper)`
   color: var(--bg-secondary);
-  background-color: var(--color-primary);
+  background-image: var(--color-primary);
   p,
   span,
   a {

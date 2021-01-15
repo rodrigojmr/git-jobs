@@ -34,6 +34,7 @@ const Badge = styled.div`
 const Company = styled.p`
   margin-top: 0.5rem;
   margin-bottom: 1.2rem;
+  line-height: 1.5;
 `;
 
 const Location = styled.p`

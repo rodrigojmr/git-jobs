@@ -2,9 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Label = styled.label`
-  @media screen and (min-width: 600px) {
-    display: none;
-  }
+  display: none;
 `;
 
 const Input = styled.input`
@@ -19,7 +17,7 @@ const Input = styled.input`
   font-size: 1.1rem;
   border-bottom: 2px solid var(--bg-secondary);
   &::-webkit-input-placeholder {
-    color: var(--color-grey);
+    color: var(--color-grey-light);
   }
 
   &:focus::-webkit-input-placeholder {
@@ -45,9 +43,7 @@ const FormInput = React.forwardRef(
   ) => {
     return (
       <>
-        <Label style={{}} htmlFor={`${name}-input`}>
-          {name}
-        </Label>
+        <Label htmlFor={`${name}-input`}>{name}</Label>
         <Input
           id={`${name}-input`}
           ref={ref}

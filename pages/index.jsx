@@ -15,15 +15,18 @@ const LoadButton = styled(Button)`
 const Results = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  @media (min-width: 750px) {
+  ${({ theme }) => `
+  @media (min-width: ${theme.breakpoints[1]}) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  @media (min-width: 1080px) {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  @media (min-width: 1400px) {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+    }
+    @media (min-width: ${theme.breakpoints[2]}) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @media (min-width: ${theme.breakpoints[3]}) {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    `}
+
   grid-column-gap: 2rem;
   grid-row-gap: 4rem;
   padding: 2rem;

@@ -7,7 +7,16 @@ const Head = styled.header`
   justify-content: space-between;
   padding: 2rem;
   padding-bottom: 4rem;
-  background-color: var(--color-primary);
+  @media (min-width: 769px) {
+    background-image: url('/assets/desktop/bg-pattern-header.svg');
+  }
+  @media (max-width: 768px) {
+    background-image: url('/assets/tablet/bg-pattern-header.svg');
+  }
+  @media (max-width: 600px) {
+    background-image: url('/assets/mobile/bg-pattern-header.svg');
+  }
+  background-size: cover;
 `;
 
 const FlexCenter = styled.div`
