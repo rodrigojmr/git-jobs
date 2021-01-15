@@ -1,5 +1,5 @@
 {
-  "name": "git",
+  "name": "git-jobs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -15,6 +15,8 @@
     "react-dom": "17.0.1",
     "react-hook-form": "^6.14.1",
     "react-query": "^3.5.12",
-    "styled-components": "^5.2.1"
+    "react-responsive": "^8.2.0",
+    "styled-components": "^5.2.1",
+    "styled-react-modal": "^2.0.1"
   }
 }
