@@ -17,16 +17,22 @@ const Container = styled.div`
   top: -2rem;
   left: 50%;
   transform: translateX(-50%);
+  max-width: 80%;
   width: 40rem;
   > * {
     margin-bottom: 1.5rem;
 
     border-radius: 5px;
-    overflow: hidden;
+    /* overflow: hidden; */
+  }
+
+  @media screen and (max-width: 41em) {
+    top: -1rem;
   }
 `;
 
 const CompanyInfo = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   background-color: var(--bg-secondary);
@@ -41,7 +47,24 @@ const Logo = styled.div`
   color: white;
   font-size: 3rem;
   width: 10rem;
+  line-height: 1;
   background-color: ${({ theme, bgIndex }) => theme.bgColors[bgIndex]};
+
+  @media screen and (max-width: 41em) {
+    position: absolute;
+    width: 5rem;
+    height: 5rem;
+    top: -2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    border-radius: 2rem;
+
+    span {
+      margin-bottom: -0.5rem;
+      line-height: 5rem;
+    }
+  }
 `;
 
 const Info = styled.div`
@@ -51,6 +74,13 @@ const Info = styled.div`
   padding: 3.5rem 2.5rem;
   > p {
     color: #9297a2;
+  }
+
+  @media screen and (max-width: 41em) {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding-top: 5rem;
   }
 `;
 
@@ -79,6 +109,9 @@ const Description = styled.article`
   line-height: 1.5;
   p {
     margin-top: 1.25em;
+    margin-bottom: 1.25em;
+  }
+  li:last-child {
     margin-bottom: 1.25em;
   }
 `;
@@ -137,12 +170,16 @@ const JobDetails = () => {
             <CompanyInfo>
               <>
                 <Logo bgIndex={randomBGIndex(job.company.charAt(0))}>
-                  {job.company.charAt(0).toUpperCase()}
+                  <span>{job.company.charAt(0).toUpperCase()}</span>
                 </Logo>
                 <Info>
                   <div
                     css={`
                       margin-right: auto;
+                      @media screen and (max-width: 41em) {
+                        margin-right: 0;
+                        margin-bottom: 2rem;
+                      }
                     `}
                   >
                     <Heading
@@ -174,11 +211,17 @@ const JobDetails = () => {
               <Flex
                 css={`
                   align-items: center;
+                  @media screen and (max-width: 41em) {
+                    flex-direction: column;
+                  }
                 `}
               >
                 <div
                   css={`
                     margin-right: auto;
+                    @media screen and (max-width: 41em) {
+                      margin-bottom: 2rem;
+                    }
                   `}
                 >
                   <p>
@@ -197,7 +240,17 @@ const JobDetails = () => {
                   </Heading>
                   <HighlightText>{job.location}</HighlightText>
                 </div>
-                <Button primary as="a" href={applyUrl}>
+                <Button
+                  css={`
+                    @media screen and (max-width: 41em) {
+                      width: 100%;
+                      text-align: center;
+                    }
+                  `}
+                  primary
+                  as="a"
+                  href={applyUrl}
+                >
                   Apply Now
                 </Button>
               </Flex>

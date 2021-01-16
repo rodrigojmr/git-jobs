@@ -6,6 +6,7 @@ import { useQueryClient, useInfiniteQuery } from 'react-query';
 import Result from '@components/Results/Result';
 import SkeletonResult from '@components/Skeleton/SkeletonResult';
 import { Button } from '@components/styled';
+import theme from '@components/Theme/theme';
 
 const LoadButton = styled(Button)`
   grid-column: 1 / -1;
@@ -15,17 +16,16 @@ const LoadButton = styled(Button)`
 const Results = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  ${({ theme }) => `
+
   @media (min-width: ${theme.breakpoints[1]}) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    @media (min-width: ${theme.breakpoints[2]}) {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    @media (min-width: ${theme.breakpoints[3]}) {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-    `}
+  }
+  @media (min-width: ${theme.breakpoints[2]}) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  @media (min-width: ${theme.breakpoints[3]}) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 
   grid-column-gap: 2rem;
   grid-row-gap: 4rem;
@@ -44,7 +44,7 @@ const Home = () => {
   const queryClient = useQueryClient();
 
   const fetchJobs = async ({ queryKey, pageParam = 1 }) => {
-    const [_key, text, location, fullTime] = queryKey;
+    const [_key, text = '', location = '', fullTime = ''] = queryKey;
     console.log(
       `https://jobs.github.com/positions.json?description=${text}&location=${location}&full_time=${fullTime}&page=${pageParam}`
     );
@@ -95,7 +95,6 @@ const Home = () => {
     });
   };
 
-  console.table(data);
   return (
     <>
       <Search onSubmit={handleSubmit(onSubmit)} ref={register} />

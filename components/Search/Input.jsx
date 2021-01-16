@@ -37,6 +37,8 @@ const FormInput = React.forwardRef(
       placeholder = '',
       type = text,
       checkboxValue = false,
+      onChange,
+      value,
       children
     },
     ref
@@ -47,10 +49,12 @@ const FormInput = React.forwardRef(
         <Input
           id={`${name}-input`}
           ref={ref}
+          onChange={onChange}
+          value={value || ''}
           className={className}
           type={type}
           name={name}
-          checkboxValue={checkboxValue}
+          checkboxValue={checkboxValue || null}
           placeholder={placeholder}
         />
       </>

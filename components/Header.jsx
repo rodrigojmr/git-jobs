@@ -7,6 +7,9 @@ const Head = styled.header`
   justify-content: space-between;
   padding: 2rem;
   padding-bottom: 4rem;
+  @media screen and (max-width: 41em) {
+    padding-bottom: 6rem;
+  }
   @media (min-width: 769px) {
     background-image: url('/assets/desktop/bg-pattern-header.svg');
   }
