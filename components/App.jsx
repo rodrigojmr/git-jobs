@@ -4,6 +4,7 @@ import GlobalStyles from './Theme/GlobalStyles';
 import Header from './Header';
 import theme from './Theme/theme';
 import { ModalProvider } from 'styled-react-modal';
+import Footer from './Footer';
 
 function App({ children }) {
   return (
@@ -13,6 +14,7 @@ function App({ children }) {
           <GlobalStyles />
           <Header />
           {children}
+          <Footer />
         </ModalProvider>
       </DarkLightThemeProvider>
     </ThemeProvider>

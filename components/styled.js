@@ -22,12 +22,11 @@ export const Button = styled.button`
   line-height: 1.2;
   cursor: pointer;
   ${({ disabled }) =>
-    disabled
-      ? `
-  cursor: not-allowed;
-  filter: brightness(.6);
-  `
-      : null}
+    disabled &&
+    css`
+      cursor: not-allowed;
+      filter: brightness(0.6);
+    `}
 `;
 
 export const Flex = styled.div`
