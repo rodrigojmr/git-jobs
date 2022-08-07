@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import App from '@components/App';
+import { Provider } from 'next-auth/client';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -17,11 +18,13 @@ const queryClient = new QueryClient({
 
 function MyApp({ Component, pageProps }) {
   return (
-    <QueryClientProvider client={queryClient}>
-      <App>
-        <Component {...pageProps} />
-      </App>
-    </QueryClientProvider>
+    <Provider session={pageProps.session}>
+      <QueryClientProvider client={queryClient}>
+        <App>
+          <Component {...pageProps} />
+        </App>
+      </QueryClientProvider>
+    </Provider>
   );
 }
 

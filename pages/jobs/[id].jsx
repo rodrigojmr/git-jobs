@@ -7,6 +7,7 @@ import { Button, Flex, Heading, Dot, HighlightText } from '@components/styled';
 import { timeDifference } from 'utils';
 import SkeletonJobView from '@components/Skeleton/SkeletonJobView';
 import { randomBGIndex } from 'utils';
+import axios from 'axios';
 
 const Main = styled.main`
   position: relative;
@@ -139,18 +140,14 @@ const JobDetails = () => {
 
   const { isLoading, error, data } = useQuery(`job-${jobId}-data`, async () => {
     try {
-      const res = await fetch(
+      const res = await axios.get(
         `https://api.allorigins.win/get?url=${encodeURIComponent(
           `https://thingproxy.freeboard.io/fetch/https://jobs.github.com/positions/${jobId}.json`
         )}`
       );
-      const data = await res.json();
-      if (data.status.http_code === 200) {
-        console.log('JSON.parse(data.contents): ', JSON.parse(data.contents));
-        return JSON.parse(data.contents);
-      }
+      const data = await JSON.parse(res.data.contents);
+      return data;
     } catch (error) {
-      console.log('error: ', error);
       throw new Error('Could not fetch job.');
     }
   });
@@ -158,7 +155,6 @@ const JobDetails = () => {
   const job = data;
   const url = data?.company_url?.replace(/(https:|http:|www.|\/)/g, '');
   const applyUrl = job?.how_to_apply.match(/href="(.*)"/)[1];
-  console.log('applyUrl: ', applyUrl);
 
   if (isLoading) return <SkeletonJobView />;
 

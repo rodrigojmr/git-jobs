@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import styled from 'styled-components';
 import ThemeToggle from './ThemeToggle';
+import { signIn, signOut, useSession } from 'next-auth/client';
+import Image from 'next/image';
+import GithubIcon from './github.svg';
 
 const Head = styled.header`
   display: flex;
@@ -22,24 +25,54 @@ const Head = styled.header`
   background-size: cover;
 `;
 
+const Button = styled.button`
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 5px;
+  background-color: #2a2f36;
+  color: white;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 1rem;
+`;
+
 const FlexCenter = styled.div`
   display: flex;
   align-items: center;
 `;
 
 const Header = () => {
+  const [session, loading] = useSession();
+
   return (
     <Head>
       <Link href="/">
-        <img
-          style={{ cursor: 'pointer' }}
-          src="/assets/desktop/logo.svg"
-          alt="Logo"
-        />
+        <FlexCenter>
+          <img
+            style={{ cursor: 'pointer' }}
+            src="/assets/desktop/logo.svg"
+            alt="Logo"
+          />
+        </FlexCenter>
       </Link>
-      <FlexCenter>
+      <FlexCenter style={{ marginLeft: 'auto' }}>
         <ThemeToggle />
       </FlexCenter>
+      {!session && (
+        <>
+          <Button onClick={() => signIn()}>
+            <GithubIcon />
+            <span style={{ marginLeft: '10px' }}>Sign in</span>
+          </Button>
+        </>
+      )}
+      {session && (
+        <>
+          <Button onClick={() => signOut()}>Sign out</Button>
+        </>
+      )}
     </Head>
   );
 };

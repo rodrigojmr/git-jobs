@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import Search from '@components/Search/Search';
-import styled from 'styled-components';
-import { useForm, Controller } from 'react-hook-form';
-import { useQueryClient, useInfiniteQuery } from 'react-query';
 import Result from '@components/Results/Result';
+import Search from '@components/Search/Search';
 import SkeletonResult from '@components/Skeleton/SkeletonResult';
 import { Button } from '@components/styled';
 import theme from '@components/Theme/theme';
+import { useSession } from 'next-auth/client';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useInfiniteQuery, useQuery, useQueryClient } from 'react-query';
+import styled from 'styled-components';
+import axios from 'axios';
 
 const LoadButton = styled(Button)`
   grid-column: 1 / -1;
@@ -34,6 +36,7 @@ const Results = styled.div`
 
 const Home = () => {
   const { register, handleSubmit, control, reset } = useForm();
+  const [session, loading] = useSession();
 
   const [searchParams, setSearchParams] = useState({
     text: '',
@@ -45,19 +48,17 @@ const Home = () => {
 
   const fetchJobs = async ({ queryKey, pageParam = 1 }) => {
     const [_key, text = '', location = '', fullTime = ''] = queryKey;
-    console.log(
-      `https://jobs.github.com/positions.json?description=${text}&location=${location}&full_time=${fullTime}&page=${pageParam}`
-    );
+
     try {
-      const res = await fetch(
+      const res = await axios.get(
         `https://api.allorigins.win/get?url=${encodeURIComponent(
           `https://jobs.github.com/positions.json?description=${text}&location=${location}&full_time=${fullTime}&page=${pageParam}`
         )}`,
-        { credentials: 'include' }
+        { withCredentials: true }
       );
-      const data = await res.json();
+      const data = await JSON.parse(res.data.contents);
       const results = {
-        jobs: JSON.parse(data.contents),
+        jobs: data,
         page: pageParam + 1
       };
       return results;
@@ -85,6 +86,19 @@ const Home = () => {
       }
     }
   );
+
+  const getDbJobs = async () => {
+    if (!session?.user?.email) return;
+    try {
+      const res = await axios.get(`/api/jobs/${session.user.email}`);
+      const data = await res.json();
+      return data;
+    } catch (error) {
+      throw new Error("Couldn't fetch your saved jobs.");
+    }
+  };
+
+  const sabedJobsQuery = useQuery('saved-jobs', getDbJobs);
 
   const onSubmit = async data => {
     const { text, location, fullTime } = data;

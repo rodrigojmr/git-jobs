@@ -3,6 +3,10 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { randomBGIndex, timeDifference } from 'utils';
 import { Dot } from '@components/styled';
+import { signIn, signOut, useSession } from 'next-auth/client';
+import HeartIcon from '../heart.svg';
+import { useMutation } from 'react-query';
+import axios from 'axios';
 
 const Container = styled.article`
   position: relative;
@@ -55,12 +59,44 @@ const StyledLink = styled.a`
   text-decoration: none;
 `;
 
+const SaveButton = styled.button`
+  position: absolute;
+  padding: 0.8rem;
+  right: 0;
+  top: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: ${({ checked }) => (checked ? 'red' : 'rgba(237, 71, 59, 0.9)')};
+  cursor: pointer;
+
+  &:hover svg {
+    fill: rgba(237, 71, 59, 0.8);
+  }
+`;
+
 const Result = ({ job }) => {
+  const [session, loading] = useSession();
+  const createMutation = useMutation(newJob => axios.post(`/api/jobs`, newJob));
+  const deleteMutation = useMutation(jobToDelete =>
+    axios.delete(`/api/jobs`, jobToDelete)
+  );
+
   return (
     <Container>
       <Badge bgIndex={randomBGIndex(job.company.charAt(0))}>
         <p>{job.company[0].toUpperCase()}</p>
       </Badge>
+      {session && (
+        <SaveButton
+          aria-label="Save job"
+          onClick={() => {
+            createMutation.mutate(job);
+          }}
+        >
+          <HeartIcon />
+        </SaveButton>
+      )}
       <div
         css={`
           display: flex;
